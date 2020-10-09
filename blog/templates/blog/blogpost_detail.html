@@ -1,0 +1,34 @@
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+    <div class="blog-detail">
+        <h1>{{ blog }}</h1>
+        {% if perms.blog.change_blogpost %}<p><a href="{% url 'blog:blogpost-update' blog.id %}">Edit</a></p>{% endif %}
+
+        <div class="obj-details">
+            <p class="obj-details">Author: <a class="object-link" href="{% url 'blog:author-detail' blog.author.id %}">{{ blog.author }}</a></p>
+            <p class="obj-details">Published on {{ blog.creation_date|date:"DATETIME_FORMAT" }}</p>
+        </div>
+        <hr>
+        <div class="blog-content">
+            <p class="blog-txt">{{ blog.txt|linebreaksbr }}</p>
+        </div>
+        <hr>
+        <div class="blog-comments">
+            <h3>Comments</h3>
+            {% if comments %}
+                <ul class="comment-list">
+                    {% for comment in comments %}
+                        <li class="comment">
+                            <p class="comm-title"><a class="object-link" href="{% url 'blog:author-detail' comment.author.id %}">{{ comment.author }}</a> on {{ comment.creation_date|date:"SHORT_DATETIME_FORMAT" }}</p>
+                            <p class="comm-txt">{{ comment.txt }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a class="add-obj-link" href="{% url 'blog:add-comment' blog.id %}">Add a comment</a>
+            {% else %}
+                <p class="no-objs">No comments yet, <a class="add-obj-link" href="{% url 'blog:add-comment' blog.id %}">add one!</a></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

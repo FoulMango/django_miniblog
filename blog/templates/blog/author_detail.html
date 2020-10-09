@@ -1,0 +1,27 @@
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+    <div class="author-detail">
+        <h1>{{ author }}</h1>
+        <div class="obj-details">
+            {% if author.first_name and author.last_name %}<p>Full name: {{ author.first_name }} {{ author.last_name }}</p>{% endif %}
+            {% if author.email %}<p>Email address: {{author.email}}</p>{% endif %}
+            <p>Date joined: {{ author.date_joined }}</p>
+            <hr>
+            {% if bio %}<p>{{ bio }}</p>{% else %}<p class="no-objs">No biography to show</p>{% endif %}
+        </div>
+        <div class="author-blogs">
+            {% if blogs %}
+                <ul class="blog-list">
+                    {% for blog in blogs %}
+                        <li class="blog-instance">
+                            <a class="object-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog }} - {{ blog.creation_date|date:"DATE_FORMAT" }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-objs">No blogs published by this user</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
