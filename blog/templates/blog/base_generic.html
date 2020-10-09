@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block staticfiles %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+    {% endblock %}
+    <meta charset="UTF-8">
+    <title>{% block title%}MyMiniBlog{% endblock %}</title>
+</head>
+<body>
+    <div id="container">
+        <nav id="nav">
+            {% block nav %}
+                <ul>
+                    <li>Navigate</li>
+                    <li><a href="{% url 'blog:blog-index' %}">Blog</a></li>
+                    <li><a href="{% url 'blog:blogs' %}">All Blog Posts</a></li>
+                   {% if user.is_authenticated %}
+                        <li>User: <a class="object-link" href="{% url 'blog:author-detail' user.id %}">{{ user.get_username }}</a></li>
+                        <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+                        {% if perms.blog.add_blogpost %}<li><a href="{% url 'blog:blogpost-add' %}">New blog post</a></li>{% endif %}
+                   {% else %}
+                        <li><a href="{% url 'login' %}?next={{request.path}}">Login</a></li>
+                        <li><a href="{% url 'sign-up' %}">Sign up</a></li>
+                   {% endif %}
+                </ul>
+            {% endblock %}
+        </nav>
+        <div class="content">
+            {% block content %} <p>Hello, this is my blog.</p> {% endblock %}
+        </div>
+        {% block pagination %}
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+</body>
+</html>

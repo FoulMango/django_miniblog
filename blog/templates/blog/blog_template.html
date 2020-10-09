@@ -1,0 +1,21 @@
+{% extends "blog/base_generic.html" %}
+
+{% block content %}
+<h1>Wellcome to my blog!</h1>
+{% if blogs %}<h3>Some latest published blogs</h3>{% else %}<h3 class="no-objs">No blogs to show</h3>{% endif %}
+<div class="blogs">
+    <ul class="blog-list">
+        {% for blog in blogs %}
+            <li class="blog-instance"><a class="object-link" href="{% url 'blog:blog-detail' blog.id %}">{{ blog }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="authors">
+    <h3>Some authors</h3>
+    <ul class="author-list">
+        {% for author in authors %}
+            <li class="author-instance"><a class="object-link" href="{% url 'blog:author-detail' author.id %}">{{ author }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+html h1, h3 {
+    font-variant: small-caps;
+}
+.content {
+    background: #80808045;
+    box-shadow: 5px 5px 2px 2px #0000005c;
+    width: 80vw;
+    padding-left: 15px;
+    position: fixed;
+    top: 15px;
+    right: 50px;
+}
+div.obj-details {
+    background: #f0d2d2;
+    padding-left: 10px;
+}
+.blog-comments {
+    padding-right: 30px;
+}
+.comment-list li {
+    list-style-type: none;
+}
+.comm-title {
+    background: #80808045;
+    margin-bottom: 5px
+}
+.comm-txt {
+    padding-left: 20px;
+    background: #ffffff94;
+    background-clip: content-box;
+}
+#nav ul li {
+    list-style-type: none;
+    width: 10vw;
+    padding-left: 30px;
+}
+#nav ul li:first-child {
+    background: #80808045;
+    padding-left: 10px;
+    font-size: 125%;
+}
+#nav ul a {
+    text-decoration: none;
+}
+#nav ul a:hover {
+    color: red;
+    text-decoration: underline;
+}
