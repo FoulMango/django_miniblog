@@ -152,7 +152,7 @@ EMAIL_PORT = 587
 
 EMAIL_HOST_USER = 'victorestigarribia60@gmail.com'
 
-EMAIL_HOST_PASSWORD = 'comgbwpnopekzbxq'
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 # Heroku: Update database configuration from $DATABASE_URL.
 import dj_database_url
